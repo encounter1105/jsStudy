@@ -63,16 +63,16 @@
 // 1.对象的唯一属性
 // 如果想要拿到Symbol()的值
 // 方法1
-let key = Symbol()
-let obj = {
-    [key]: 100
-}
-console.log(obj[key]) 
-// 方法2
-let arr = Object.getOwnPropertySymbols(obj) //获得当前对象所有的Symbol属性
-arr.forEach(item => {
-    console.log(obj[item])
-})
+// let key = Symbol()
+// let obj = {
+//     [key]: 100
+// }
+// console.log(obj[key]) 
+// // 方法2
+// let arr = Object.getOwnPropertySymbols(obj) //获得当前对象所有的Symbol属性
+// arr.forEach(item => {
+//     console.log(obj[item])
+// })
 
 // 2.宏观管理标识：保证标志的唯一性（vuex/redux）
 
