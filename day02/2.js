@@ -69,3 +69,4 @@ function fn(y) {
 }
 // fn(x);
 console.log(x); // [100,23]
+
