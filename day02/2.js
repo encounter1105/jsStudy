@@ -54,8 +54,18 @@
 // 3. b = 12
 
 // 思考
-var a = {n: 1}; //->堆内存 0x000
-var b = a;
-a.x = a = { n:2}
-console.log(a.x) 
-console.log(b)
+// var a = {n: 1}; //->堆内存 0x000
+// var b = a;
+// a.x = a = { n:2}
+// console.log(a.x)  // undefined
+// console.log(b) // {n:1,x:{n:2}}
+
+var x = [12, 23];
+function fn(y) {
+    y[0] = 100;
+    y = [100];
+    y[1] = 200;
+    console.log(y); //[100,200]
+}
+// fn(x);
+console.log(x); // [100,23]
