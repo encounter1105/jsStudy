@@ -60,13 +60,82 @@
 // console.log(a.x)  // undefined
 // console.log(b) // {n:1,x:{n:2}}
 
-var x = [12, 23];
-function fn(y) {
-    y[0] = 100;
-    y = [100];
-    y[1] = 200;
-    console.log(y); //[100,200]
-}
-// fn(x);
-console.log(x); // [100,23]
+// var x = [12, 23];
+// function fn(y) {
+//     y[0] = 100;
+//     y = [100];
+//     y[1] = 200;
+//     console.log(y); //[100,200]
+// }
+// // fn(x);
+// console.log(x); // [100,23]
 
+// EC(G)
+//  VO(G)
+//   i= 0
+//   A=0x000 [A函数 [[scope]:EC(G)]]
+//   y=0x001
+//   B=0x003[B函数 [[scope]:EC(G)]]
+// var i = 0;
+// function A() {
+//     // EC(A) 私有上下文
+//     //  AO(A)
+//     //    i=10
+//     //   x=0x001[x函数 [[scope]:EC(A)]]
+//     //  作用域链：<EC(A),EC(G)>
+//     //  形参赋值：--
+//     //  变量提升 
+//     var i = 10;
+//     function x(){
+//         // EC(X1)
+//         //  AO(X1)
+//         //  作用域链<EC(x1),EC(A)> 函数执行的上级上下文是它的作用域[之和在哪创建的有关系，和在那执行没有关系]
+//         //  形参赋值：---
+//         //  变量提升：。。。
+//         // EC(X2)
+//         //  AO(X2)
+//         //  作用域链<EC(x2),EC(A)> 函数执行的上级上下文是它的作用域[之和在哪创建的有关系，和在那执行没有关系]
+//         //  形参赋值：---
+//         //  变量提升：。。。
+//         console.log(i); // 获取其上级上下文中EC(A)中的i =>10
+//     }
+//     return x; // return 0x001
+// }
+
+// var y = A(); //把A执行的返回值[return]赋值给全局的y
+// y();
+// function B() {
+//     // EC(B)
+//     //  AO(B)
+//     //     i=20
+//     //  作用域链：<EC(B),EC(G)>
+//     //  形参赋值：--
+//     var i = 20;
+//     y();
+// }
+// B();
+
+let x = 5;
+function fn(x) {
+    return function(y) {
+        console.log(y + (++x));
+    }
+}
+let f = fn(6);
+f(7)
+fn(8)(9);
+f(10);
+console.log(x);
+
+// ++x & x++
+//  ++x:先累加1，用累加后的结果再去运算
+//  x++:先拿原始值去运算，运算结束后，自身累加1
+//  ==> 累加操作都是数学运算 和 x+=1(x=x+1)不完全一致
+
+// let i = 1;
+// console.log(5 + (++i)); //-> 7
+// console.log(i) //-> 2
+
+// let i = 1;
+// console.log(5 + (i)); //-> 6
+// console.log(i) //-> 2
